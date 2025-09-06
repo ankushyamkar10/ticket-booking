@@ -102,5 +102,8 @@ public class TrainService {
         }
     }
 
+    public Optional<Train> getTrainById(String trainId){
+       return trainsList.stream().filter(train -> train.getTrainId().equals(trainId)).findFirst();
+    }
 
 }

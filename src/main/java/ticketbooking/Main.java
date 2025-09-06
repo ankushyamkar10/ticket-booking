@@ -182,7 +182,54 @@ public class Main {
                     }
                 }
 
-                case 6 -> System.out.println("Cancel booking feature not yet implemented");
+                case 6 -> {
+                    if (loggedInUser == null) {
+                        System.out.println("You must login first!");
+                        break;
+                    }
+
+                    List<Ticket> bookings = userBookingService.fetchBookings();
+                    if (bookings.isEmpty()) {
+                        System.out.println("No bookings to cancel.");
+                        break;
+                    }
+
+                    System.out.println("Your bookings:");
+                    for (int i = 0; i < bookings.size(); i++) {
+                        Ticket t = bookings.get(i);
+                        System.out.println((i + 1) + ". Ticket ID: " + t.getTicketId() +
+                                ", Train: " + t.getTrainId() +
+                                ", Seat: [" + t.getSeatNumber() + "]" +
+                                ", From: " + t.getSource() +
+                                ", To: " + t.getDestination());
+                    }
+
+                    System.out.println("Select a booking to cancel by typing its number:");
+                    try {
+                        int choice = Integer.parseInt(scanner.nextLine().trim()) - 1;
+                        if (choice >= 0 && choice < bookings.size()) {
+                            Ticket ticketToCancel = bookings.get(choice);
+                            boolean canceled = userBookingService.cancelBooking(ticketToCancel.getTicketId());
+                            if (canceled) {
+                                Optional<Train> trainToUpdate = trainService.getTrainById(ticketToCancel.getTrainId());
+                                if(trainToUpdate.isPresent()) {
+                                    List<List<Integer>> seats = trainService.fetchSeats(trainToUpdate.get());
+                                    String[] seat= ticketToCancel.getSeatNumber().split("-");
+                                    seats.get(Integer.parseInt(seat[0])).set(Integer.parseInt(seat[1]),0);
+                                    trainToUpdate.get().setSeats(seats);
+                                    trainService.updateTrain(trainToUpdate.get());
+                                    System.out.println("Booking canceled successfully!");
+                                }
+                            } else {
+                                System.out.println("Failed to cancel booking.");
+                            }
+                        } else {
+                            System.out.println("Invalid choice!");
+                        }
+                    } catch (NumberFormatException e) {
+                        System.out.println("Invalid input!");
+                    }
+                }
 
                 case 7 -> {
                     if (loggedInUser != null) {

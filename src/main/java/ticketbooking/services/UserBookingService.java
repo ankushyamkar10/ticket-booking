@@ -96,7 +96,6 @@ public class UserBookingService {
     public List<Ticket> fetchBookings() {
         Optional<User> foundUser = findUser(user);
         if (foundUser.isPresent()) {
-        System.out.println(foundUser.get().getTicketsBooked());
         return foundUser.get().getTicketsBooked();
 
         }
@@ -112,8 +111,30 @@ public class UserBookingService {
             return Boolean.FALSE;
         }
 
-        boolean found = user.getTicketsBooked().removeIf(ticket -> ticket.getTicketId().equals(ticketId));
-        if (found) {
+        // Find the full user object from userList
+        Optional<User> existingUserOpt = userList.stream()
+                .filter(u -> u.getName().equals(user.getName()))
+                .findFirst();
+
+        if (existingUserOpt.isEmpty()) {
+            System.out.println("User not found");
+            return Boolean.FALSE;
+        }
+
+        User existingUser = existingUserOpt.get();
+
+        // Remove ticket
+        boolean removed = existingUser.getTicketsBooked().removeIf(ticket -> ticket.getTicketId().equals(ticketId));
+
+        if (removed) {
+            // Persist changes
+            try {
+                saveUserListToFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+                return Boolean.FALSE;
+            }
+
             System.out.println("Booking has been cancelled with id: " + ticketId);
             return Boolean.TRUE;
         } else {
@@ -121,6 +142,7 @@ public class UserBookingService {
             return Boolean.FALSE;
         }
     }
+
 
     public Boolean addBooking(User user, Train train, int row, int col, String source, String dest) {
         if (user == null || train == null) return Boolean.FALSE;
