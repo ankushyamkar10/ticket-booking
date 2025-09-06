@@ -1,0 +1,55 @@
+[ {
+  "name" : "Lovepreet Singh",
+  "password" : "12345",
+  "hashed_password" : "$2a$10$MqonEcizso4Re9iFEMajHOIHCUd5O3Q.XZX779C50ZnC/Hb6mirwW",
+  "tickets_booked" : [ {
+    "ticket_id" : "your_ticket_id",
+    "user_id" : "abcdefgh",
+    "source" : "Bangalore",
+    "destination" : "Delhi",
+    "date_of_travel" : "2023-12-08T18:30:00Z",
+    "train_id" : null,
+    "seat_number" : null,
+    "ticket_info" : "Ticket ID: your_ticket_id belongs to User abcdefgh from Bangalore to Delhi on 2023-12-08T18:30:00Z"
+  } ],
+  "user_id" : "abcdefgh"
+}, {
+  "name" : "a",
+  "password" : "a",
+  "hashed_password" : "$2a$10$qaaqbjr4P0QUh0D9Xc0zK.2ON9nAw359a/XHg85yUHVyxwPxyV8fW",
+  "tickets_booked" : [ {
+    "ticket_id" : "d996562c-ca30-47cf-9774-ac96bf87dd9e",
+    "user_id" : null,
+    "source" : "bangalore",
+    "destination" : "delhi",
+    "date_of_travel" : null,
+    "train_id" : "bacs",
+    "seat_number" : "1-2",
+    "ticket_info" : "Ticket ID: d996562c-ca30-47cf-9774-ac96bf87dd9e belongs to User null from bangalore to delhi on null"
+  }, {
+    "ticket_id" : "a1f5873b-b562-4add-b7e6-37fc7528a927",
+    "user_id" : null,
+    "source" : "bangalore",
+    "destination" : "delhi",
+    "date_of_travel" : null,
+    "train_id" : "bacs",
+    "seat_number" : "0-0",
+    "ticket_info" : "Ticket ID: a1f5873b-b562-4add-b7e6-37fc7528a927 belongs to User null from bangalore to delhi on null"
+  }, {
+    "ticket_id" : "a5f5bb55-18b5-4f7e-985c-db7ef9b63b15",
+    "user_id" : null,
+    "source" : "bangalore",
+    "destination" : "delhi",
+    "date_of_travel" : null,
+    "train_id" : "bacs",
+    "seat_number" : "3-3",
+    "ticket_info" : "Ticket ID: a5f5bb55-18b5-4f7e-985c-db7ef9b63b15 belongs to User null from bangalore to delhi on null"
+  } ],
+  "user_id" : "c31b6c8d-3c59-4d7a-98f0-11e685725e47"
+}, {
+  "name" : "8",
+  "password" : "8",
+  "hashed_password" : "$2a$10$jERi5W6LQsUcLcphmc.ur.5lseMQaTGOWTpY3ChRID42uJLpHvsHy",
+  "tickets_booked" : [ ],
+  "user_id" : "2acd3a66-c8e8-4e05-81d3-4f9bc0bba8d9"
+} ]
